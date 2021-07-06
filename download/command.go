@@ -16,11 +16,12 @@ func Url(flags []cli.Flag) *cli.Command {
 		Action: func (c *cli.Context) error  {
 		 fmt.Println("Url Downloader started")
 		 text := c.String("text")
+		 arg := c.String("arg")
 		 filepath, _ := os.Getwd()
 		 fmt.Println("cw ", filepath)
 		 setPath := filepath + "/dir/" + "logo.svg"
 		 fmt.Println("set ", setPath)
-		 err := UrlDownloadFile("lo.svg", text)
+		 err := UrlDownloadFile(arg, text)
 		 if err != nil {
 			 panic(err)
 		 }

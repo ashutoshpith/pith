@@ -11,7 +11,16 @@ func TextFlag() *cli.StringFlag {
 	return &f
 	
 }
- 
+ func ArgFlag() *cli.StringFlag {
+	f := cli.StringFlag {     
+	  Name: "arg",
+	  Aliases: []string{"a"},
+	  Usage: "Args",
+	}
+	return &f
+	
+}
+
 func HostFlag() *cli.StringFlag {
 	 f := cli.StringFlag {     
 	   Name: "host",
