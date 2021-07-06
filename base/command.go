@@ -50,5 +50,3 @@ func Command(flags []cli.Flag) *cli.Command {
 	}
 	return &c
 }
-
-

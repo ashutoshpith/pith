@@ -7,6 +7,7 @@ import (
 	"sort"
 
 	"github.com/ashutoshpith/base"
+	"github.com/ashutoshpith/download"
 	"github.com/ashutoshpith/xlsx"
 	"github.com/urfave/cli/v2"
 )
@@ -28,12 +29,14 @@ func main() {
 	nameCommand := base.Name(app.Flags)
     commandCommand := base.Command(app.Flags)
 	xlsxCommand := xlsx.Xlsx(app.Flags)
+	urlDownloadCommand := download.Url(app.Flags)
 
 	app.Commands = []*cli.Command {
 		testCommand,
 		nameCommand,
 		commandCommand,
 		xlsxCommand,
+		urlDownloadCommand,
 
 	}
 	sort.Sort(cli.FlagsByName(app.Flags))
