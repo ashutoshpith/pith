@@ -18,12 +18,14 @@ func main() {
 	app.Usage = "Magic To Begin"
 	app.Version = "v1.0.0"
 
-    textFlag := base.TextFlag()
+    text1Flag := base.Text1Flag()
+    text2Flag := base.Text2Flag()
 	hostFlag := base.HostFlag()
-	argFlag := base.ArgFlag()
+	arg1Flag := base.Arg1Flag()
+	arg2Flag := base.Arg2Flag()
 
 	app.Flags = []cli.Flag {
-		textFlag, hostFlag, argFlag,
+		text1Flag, text2Flag, hostFlag, arg1Flag, arg2Flag,
 	}
 
 	testCommand := base.Test(app.Flags)

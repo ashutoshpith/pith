@@ -4,17 +4,25 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"sync"
 )
-
-func UrlDownloadFile(filepath string , url string) error {
-	resp, err := http.Get(url)
+type Payload struct {
+	filepath string
+	url string 
+	wg *sync.WaitGroup
+}
+func UrlDownloadFile(payload Payload) error {
+	if payload.wg != nil {
+		defer payload.wg.Done()
+	}
+	resp, err := http.Get(payload.url)
 	if err != nil {
 		return nil
 	}
 
 	defer resp.Body.Close()
 
-	out , err := os.Create(filepath)
+	out , err := os.Create(payload.filepath)
 	if err != nil {
 		return err
 	}

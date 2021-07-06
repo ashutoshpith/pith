@@ -2,23 +2,40 @@ package base
 
 import "github.com/urfave/cli/v2"
 
-func TextFlag() *cli.StringFlag {
+func Text1Flag() *cli.StringFlag {
 	f := cli.StringFlag {     
-	  Name: "text",
-	  Aliases: []string{"t"},
+	  Name: "text1",
+	  Aliases: []string{"t1"},
 	  Usage: "Show Name",
 	}
-	return &f
-	
+	return &f	
 }
- func ArgFlag() *cli.StringFlag {
+
+func Text2Flag() *cli.StringFlag {
 	f := cli.StringFlag {     
-	  Name: "arg",
-	  Aliases: []string{"a"},
-	  Usage: "Args",
+	  Name: "text2",
+	  Aliases: []string{"t2"},
+	  Usage: "Show Name",
+	}
+	return &f	
+}
+
+func Arg1Flag() *cli.StringFlag {
+	f := cli.StringFlag {     
+	  Name: "arg1",
+	  Aliases: []string{"a1"},
+	  Usage: "Args1",
 	}
 	return &f
-	
+}
+
+func Arg2Flag() *cli.StringFlag {
+	f := cli.StringFlag {     
+	  Name: "arg2",
+	  Aliases: []string{"a2"},
+	  Usage: "Args2",
+	}
+	return &f
 }
 
 func HostFlag() *cli.StringFlag {
@@ -27,6 +44,5 @@ func HostFlag() *cli.StringFlag {
 	   Aliases: []string{"ho"},
 	   Usage: "Host Flag",
 	 }
-	 return &f
-	 
+	 return &f 
 }
