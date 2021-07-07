@@ -14,6 +14,14 @@ func Url(flags []cli.Flag) *cli.Command {
 		Name: "url",
 		Aliases: []string{"u"},
 		Flags: flags,
+		Before: func(c *cli.Context) error {
+			fmt.Println("Process Started")
+			return nil
+		},
+		After: func(c *cli.Context) error {
+			fmt.Println("Here We done with Your Work")
+			return nil
+		},
 		Action: func (c *cli.Context) error  {
 		 fmt.Println("Url Downloader started")
 		 text1 := c.String("text1")
@@ -22,8 +30,8 @@ func Url(flags []cli.Flag) *cli.Command {
 		 arg2 := c.String("arg2")
 		 filepath, _ := os.Getwd()
 		 fmt.Println("cw ", filepath)
-		 setPath := filepath + "/dir/" + "logo.svg"
-		 fmt.Println("set ", setPath)
+		//  setPath := filepath + "/dir/" + "logo.svg"
+		//  fmt.Println("set ", setPath)
 		 var wg sync.WaitGroup
 		 for i := 0; i < 2; i++ {
 			 wg.Add(1)
@@ -41,7 +49,6 @@ func Url(flags []cli.Flag) *cli.Command {
 
 		 fmt.Println("Downloaded Url: ", text1)
 		 fmt.Println("Downloaded Url: ", text2)
-		 fmt.Println("done")
 		 return nil
 		 },
 	}
