@@ -11,6 +11,7 @@ import (
 	"github.com/ashutoshpith/download"
 	"github.com/ashutoshpith/xlsx"
 	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2/altsrc"
 )
 
 func main() {
@@ -27,6 +28,7 @@ func main() {
 		CommandNotFound: func(c *cli.Context, s string) {
 			fmt.Println("There is No Command Like This")
 		},
+ 
 		After: func(c *cli.Context) error {
 			fmt.Fprintf(c.App.Writer, "\n\tPhew!\n")
 			return nil
@@ -38,10 +40,18 @@ func main() {
 	hostFlag := base.HostFlag()
 	arg1Flag := base.Arg1Flag()
 	arg2Flag := base.Arg2Flag()
+	loadFloag := base.LoadFlag()
 
 	app.Flags = []cli.Flag {
-		text1Flag, text2Flag, hostFlag, arg1Flag, arg2Flag,
+		altsrc.NewIntFlag(&cli.IntFlag{
+			Name: "test",
+			Aliases: []string{"ts"},
+		}),
+		
+		text1Flag, text2Flag, hostFlag, arg1Flag, arg2Flag, loadFloag,
+		
 	}
+	app.Before = altsrc.InitInputSourceWithContext(app.Flags, altsrc.NewYamlSourceFromFlagFunc("yaml"))
 
 	testCommand := base.Test(app.Flags)
 	nameCommand := base.Name(app.Flags)

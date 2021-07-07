@@ -2,8 +2,10 @@ package base
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v2/altsrc"
 )
 
 
@@ -29,8 +31,18 @@ func Name(flags []cli.Flag) *cli.Command {
 		Usage: "Name Printitng",
 		Flags: flags,
 		Action: func(c *cli.Context) error {
-			flag := c.String("text")
-			fmt.Print("Here ", flag)
+			flag := c.String("yaml")
+			read, err := altsrc.NewYamlSourceFromFile(flag)
+			// readJson, err := altsrc.NewJSONSourceFromFile(flag)
+			if err != nil {
+				fmt.Println(err)
+			}
+			fmt.Println(read)
+			os.Setenv("kp", "gopher")
+	        os.Setenv("nl", "/usr/gopher")
+            res , _ := read.String("a")
+			fmt.Println("Here ",res, read.Source(), os.Getenv("HOME"))
+			fmt.Println(os.ExpandEnv("$kp lives in $nl"))
 			return nil
 		},
 	}

@@ -46,3 +46,13 @@ func HostFlag() *cli.StringFlag {
 	 }
 	 return &f 
 }
+
+
+func LoadFlag() *cli.StringFlag {
+	f := cli.StringFlag {     
+	  Name: "yaml",
+	  Aliases: []string{"yml"},
+	  Usage: "Load Yaml/Yml Flag",
+	}
+	return &f 
+}
