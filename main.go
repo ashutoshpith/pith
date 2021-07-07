@@ -14,9 +14,13 @@ import (
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "Pith"
-	app.Usage = "Magic To Begin"
-	app.Version = "v1.0.0"
+	app.Name = base.Info().Name
+	app.Usage = base.Info().Usage
+	app.Version = base.Info().Version
+	app.EnableBashCompletion = true
+	app.Authors = []*cli.Author{
+		base.Author(),
+	}
 
     text1Flag := base.Text1Flag()
     text2Flag := base.Text2Flag()
@@ -44,7 +48,7 @@ func main() {
 	}
 	sort.Sort(cli.FlagsByName(app.Flags))
 	sort.Sort(cli.CommandsByName(app.Commands))
-  
+    
 	err := app.Run(os.Args)
 	if err != nil {
 	  log.Fatal(err)

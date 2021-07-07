@@ -37,8 +37,9 @@ func Name(flags []cli.Flag) *cli.Command {
 	return &c
 }
 
-
 func Command(flags []cli.Flag) *cli.Command {
+	tasks := []string{"command", "code"}
+
 	c := cli.Command { 
 		Name: "command",
 		Aliases: []string{"c"},
@@ -46,6 +47,14 @@ func Command(flags []cli.Flag) *cli.Command {
 		Action: func (c *cli.Context) error  {
 		 fmt.Println("Command")
 		 return nil
+		 },
+		 BashComplete: func(c *cli.Context) {
+			 if c.NArg() > 0 {
+				 return 
+			 }
+			 for _, t := range tasks {
+				 fmt.Println(t)
+			 }
 		 },
 	}
 	return &c
