@@ -14,6 +14,7 @@ func Url(flags []cli.Flag) *cli.Command {
 	c := cli.Command { 
 		Name: "url",
 		Aliases: []string{"u"},
+		Usage: "Download File From Remote Host",
 		Flags: flags,
 		Before: func(c *cli.Context) error {
 			color.Info.Block("Process Started")

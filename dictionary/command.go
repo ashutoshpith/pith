@@ -11,7 +11,7 @@ func Dict(flags []cli.Flag) *cli.Command {
 
 	c := cli.Command {
 		Name: "dict",
-		Usage: "Dictionary",
+		Usage: "Search Any Word From Dictionary",
 		Aliases: []string{"di"},
 		Flags: flags,
 		Action: func(c *cli.Context) error {
