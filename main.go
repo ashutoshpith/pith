@@ -10,6 +10,7 @@ import (
 	"github.com/ashutoshpith/base"
 	"github.com/ashutoshpith/dictionary"
 	"github.com/ashutoshpith/download"
+	"github.com/ashutoshpith/table"
 	"github.com/ashutoshpith/xlsx"
 	"github.com/urfave/cli/v2"
 	"github.com/urfave/cli/v2/altsrc"
@@ -50,20 +51,22 @@ func main() {
 	}
 	app.Before = altsrc.InitInputSourceWithContext(app.Flags, altsrc.NewYamlSourceFromFlagFunc("yaml"))
 
-	testCommand := base.Test(app.Flags)
 	nameCommand := base.Name(app.Flags)
     commandCommand := base.Command(app.Flags)
 	xlsxCommand := xlsx.Xlsx(app.Flags)
 	urlDownloadCommand := download.Url(app.Flags)
 	dictCommand := dictionary.Dict(app.Flags)
+	tableCommand := table.Table(app.Flags)
+	authorCommand := base.AuthorInfo(app.Flags)
 
 	app.Commands = []*cli.Command {
-		testCommand,
 		nameCommand,
 		commandCommand,
 		xlsxCommand,
 		urlDownloadCommand,
 		dictCommand,
+		tableCommand,
+		authorCommand,
 
 	}
 	sort.Sort(cli.FlagsByName(app.Flags))

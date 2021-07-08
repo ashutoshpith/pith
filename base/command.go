@@ -9,22 +9,6 @@ import (
 )
 
 
-func Test(flags []cli.Flag) *cli.Command {
-	c := cli.Command {
-		Name: "A",
-		Usage: "B",
-		Aliases: []string{"a"},
-		Flags: flags,
-		Action: func(c *cli.Context) error {
-			value := c.String("text")
-			fmt.Println("here there ", value)
-			return nil
-		},
-	}
-	
-	return &c
-}
-
 func Name(flags []cli.Flag) *cli.Command {
 	c := cli.Command {
 		Name: "name",

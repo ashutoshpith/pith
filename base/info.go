@@ -1,6 +1,9 @@
 package base
 
-import "github.com/urfave/cli/v2"
+import (
+	"github.com/pterm/pterm"
+	"github.com/urfave/cli/v2"
+)
 
 type InfoType struct {
 	Name string
@@ -29,4 +32,22 @@ func Author() *cli.Author{
 		Email: "ashutoshpith@gmail.com",
 	} 
 	return &author
+}
+
+func AuthorInfo(flags []cli.Flag) *cli.Command {
+	c := cli.Command {
+		Name: "author",
+		Usage: "Author Info",
+		Aliases: []string{"a"},
+		Flags: flags,
+		Action: func(c *cli.Context) error {
+			pterm.DefaultTable.WithHasHeader().WithData(pterm.TableData{
+				{"Name", "Email", "Who AM I", "Job Profile"},
+				{Author().Name, Author().Email, "A Magician", "Full Stack Developer"},
+			}).Render()
+			return nil
+		},
+	}
+	
+	return &c
 }
