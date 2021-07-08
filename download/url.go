@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"os"
 	"sync"
+
+	"github.com/schollz/progressbar/v3"
 )
 type Payload struct {
 	filepath string
@@ -28,7 +30,12 @@ func UrlDownloadFile(payload Payload) error {
 	}
 
 	defer out.Close()
+	bar := progressbar.DefaultBytes(
+		resp.ContentLength,
+		"downloading",
+	)
+	
 
-	_, err = io.Copy(out, resp.Body)
+	_, err = io.Copy(io.MultiWriter(out, bar), resp.Body)
 	return err
 }

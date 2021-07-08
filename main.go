@@ -11,7 +11,6 @@ import (
 	"github.com/ashutoshpith/dictionary"
 	"github.com/ashutoshpith/download"
 	"github.com/ashutoshpith/xlsx"
-	"github.com/gookit/color"
 	"github.com/urfave/cli/v2"
 	"github.com/urfave/cli/v2/altsrc"
 )
@@ -31,14 +30,6 @@ func main() {
 		CommandNotFound: func(c *cli.Context, s string) {
 			fmt.Println("There is No Command Like This")
 		},		
-		Before: func(c *cli.Context) error {
-			color.Info.Block("Process Started")
-			return nil
-		},
-		After: func(c *cli.Context) error {
-			color.Notice.Block("Process End")
-			return nil
-		  },
 		  
 	}
     text1Flag := base.Text1Flag()

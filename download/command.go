@@ -15,6 +15,14 @@ func Url(flags []cli.Flag) *cli.Command {
 		Name: "url",
 		Aliases: []string{"u"},
 		Flags: flags,
+		Before: func(c *cli.Context) error {
+			color.Info.Block("Process Started")
+			return nil
+		},
+		After: func(c *cli.Context) error {
+			color.Notice.Block("Process End")
+			return nil
+		  },
 		Action: func (c *cli.Context) error  {
 		 text1 := c.String("text1")
 		 text2 := c.String("text2")
@@ -27,7 +35,7 @@ func Url(flags []cli.Flag) *cli.Command {
 		 })
 		 if text2 != "" {
 		 var wg sync.WaitGroup
-		 for i := 0; i < 2; i++ {
+		 for i := 0; i < 1; i++ {
 			 wg.Add(1)
 		     go UrlDownloadFile(Payload{
 			   filepath: arg2,
@@ -40,7 +48,7 @@ func Url(flags []cli.Flag) *cli.Command {
 		box := box.Box()
 		fmt.Println()
 		color.Success.Block("Downloaded Url: ")
-		box.Println(text1, text1)
+		box.Println(text1, text2)
 		 return nil
 		 },
 	}
