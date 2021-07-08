@@ -15,14 +15,6 @@ func Url(flags []cli.Flag) *cli.Command {
 		Name: "url",
 		Aliases: []string{"u"},
 		Flags: flags,
-		Before: func(c *cli.Context) error {
-			color.Green.Println("Process Started")
-			return nil
-		},
-		After: func(c *cli.Context) error {
-			color.Blue.Println("Here We done with Your Work")
-			return nil
-		},
 		Action: func (c *cli.Context) error  {
 		 text1 := c.String("text1")
 		 text2 := c.String("text2")
@@ -47,7 +39,7 @@ func Url(flags []cli.Flag) *cli.Command {
 		}
 		box := box.Box()
 		fmt.Println()
-		color.Red.Println("Downloaded Url: ")
+		color.Success.Block("Downloaded Url: ")
 		box.Println(text1, text1)
 		 return nil
 		 },
