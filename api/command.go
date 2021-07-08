@@ -1,4 +1,4 @@
-package dictionary
+package api
 
 import (
 	"github.com/urfave/cli/v2"
@@ -14,11 +14,11 @@ func Dict(flags []cli.Flag) *cli.Command {
 		Flags: flags,
 		Action: func(c *cli.Context) error {
 			value := c.String("text1")
-			dicti := Dicti{
+			api := Api{
 				Query: value,
 			}
-			data, _ := dicti.Search()
-			dicti.Iterate(*data)
+			data, _ := api.DictSearch()
+			api.DictIterate(*data)
 	
 			return nil
 		},

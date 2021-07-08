@@ -1,4 +1,4 @@
-package dictionary
+package api
 
 import (
 	"encoding/json"
@@ -9,29 +9,8 @@ import (
 
 	"github.com/Delta456/box-cli-maker/v2"
 )
-type Dicti struct {
-	url string
-	Query string
-	// data Data
-}
 
-type Data struct{
-	Word string
-	Meanings []Meanings
-
-}
-
-type Meanings struct {
-   PartOfSpeech string
-   Definitions []Definitions
-}
-
-type Definitions struct {
-   Definition string
-   Example string
-}
-
-func (api *Dicti) Search() (*[]Data, error)  {
+func (api *Api) DictSearch() (*[]DictData, error)  {
 	req := "https://api.dictionaryapi.dev/api/v2/entries/en_US/" 
 	api.url = req
 	client := http.Client{
@@ -44,7 +23,7 @@ func (api *Dicti) Search() (*[]Data, error)  {
 				return nil, err
 			}
 			defer url.Body.Close()
-            var data []Data
+            var data []DictData
 			err = json.Unmarshal(body, &data)
 			if err != nil {
 				return nil, err
@@ -52,7 +31,7 @@ func (api *Dicti) Search() (*[]Data, error)  {
 			return &data, nil
 }
 
-func (api *Dicti) Iterate(data []Data) {
+func (api *Api) DictIterate(data []DictData) {
 	config := box.Config{Px: 12, Py: 2, Type: "", TitlePos: "Inside"}
     boxNew := box.Box{TopRight: "*", TopLeft: "*", BottomRight: "*", BottomLeft: "*", Horizontal: "-", Vertical: "|", Config: config}
 	for _, j := range data {
