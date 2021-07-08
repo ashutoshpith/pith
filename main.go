@@ -7,8 +7,8 @@ import (
 
 	"sort"
 
-	"github.com/Delta456/box-cli-maker/v2"
 	"github.com/ashutoshpith/base"
+	"github.com/ashutoshpith/dictionary"
 	"github.com/ashutoshpith/download"
 	"github.com/ashutoshpith/xlsx"
 	"github.com/urfave/cli/v2"
@@ -16,9 +16,6 @@ import (
 )
 
 func main() {
-	config := box.Config{Px: 12, Py: 2, Type: "", TitlePos: "Inside"}
-    boxNew := box.Box{TopRight: "*", TopLeft: "*", BottomRight: "*", BottomLeft: "*", Horizontal: "-", Vertical: "|", Config: config}
-    boxNew.Println("Pith", "A CLi")
 
 	app := &cli.App{
 		Name: base.Info().Name,
@@ -63,6 +60,7 @@ func main() {
     commandCommand := base.Command(app.Flags)
 	xlsxCommand := xlsx.Xlsx(app.Flags)
 	urlDownloadCommand := download.Url(app.Flags)
+	dictCommand := dictionary.Dict(app.Flags)
 
 	app.Commands = []*cli.Command {
 		testCommand,
@@ -70,6 +68,7 @@ func main() {
 		commandCommand,
 		xlsxCommand,
 		urlDownloadCommand,
+		dictCommand,
 
 	}
 	sort.Sort(cli.FlagsByName(app.Flags))
