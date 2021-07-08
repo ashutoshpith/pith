@@ -5,6 +5,7 @@ import (
 	"sync"
 
 	"github.com/ashutoshpith/box"
+	"github.com/gookit/color"
 	"github.com/urfave/cli/v2"
 )
 
@@ -15,11 +16,11 @@ func Url(flags []cli.Flag) *cli.Command {
 		Aliases: []string{"u"},
 		Flags: flags,
 		Before: func(c *cli.Context) error {
-			fmt.Println("Process Started")
+			color.Green.Println("Process Started")
 			return nil
 		},
 		After: func(c *cli.Context) error {
-			fmt.Println("Here We done with Your Work")
+			color.Blue.Println("Here We done with Your Work")
 			return nil
 		},
 		Action: func (c *cli.Context) error  {
@@ -45,7 +46,8 @@ func Url(flags []cli.Flag) *cli.Command {
 		 wg.Wait()
 		}
 		box := box.Box()
-		fmt.Print("Downloaded Url: ")
+		fmt.Println()
+		color.Red.Println("Downloaded Url: ")
 		box.Println(text1, text1)
 		 return nil
 		 },
