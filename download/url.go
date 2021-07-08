@@ -6,6 +6,7 @@ import (
 	"os"
 	"sync"
 
+	"github.com/ashutoshpith/utility"
 	"github.com/schollz/progressbar/v3"
 )
 type Payload struct {
@@ -23,8 +24,13 @@ func UrlDownloadFile(payload Payload) error {
 	}
 
 	defer resp.Body.Close()
-
-	out , err := os.Create(payload.filepath)
+	var name string
+	if len(payload.filepath) != 0 {
+      name = payload.filepath
+	} else{
+    name = utility.GetName(payload.url)
+    }
+	out , err := os.Create(name)
 	if err != nil {
 		return err
 	}
@@ -39,3 +45,4 @@ func UrlDownloadFile(payload Payload) error {
 	_, err = io.Copy(io.MultiWriter(out, bar), resp.Body)
 	return err
 }
+
