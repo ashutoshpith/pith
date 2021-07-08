@@ -10,7 +10,7 @@ import (
 	"github.com/ashutoshpith/base"
 	"github.com/ashutoshpith/dictionary"
 	"github.com/ashutoshpith/download"
-	"github.com/ashutoshpith/table"
+	"github.com/ashutoshpith/sysInfo"
 	"github.com/ashutoshpith/xlsx"
 	"github.com/urfave/cli/v2"
 	"github.com/urfave/cli/v2/altsrc"
@@ -56,8 +56,8 @@ func main() {
 	xlsxCommand := xlsx.Xlsx(app.Flags)
 	urlDownloadCommand := download.Url(app.Flags)
 	dictCommand := dictionary.Dict(app.Flags)
-	tableCommand := table.Table(app.Flags)
 	authorCommand := base.AuthorInfo(app.Flags)
+	sysCommand := sysInfo.Sys(app.Flags)
 
 	app.Commands = []*cli.Command {
 		nameCommand,
@@ -65,8 +65,8 @@ func main() {
 		xlsxCommand,
 		urlDownloadCommand,
 		dictCommand,
-		tableCommand,
 		authorCommand,
+		sysCommand,
 
 	}
 	sort.Sort(cli.FlagsByName(app.Flags))
