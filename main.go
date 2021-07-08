@@ -7,8 +7,8 @@ import (
 
 	"sort"
 
-	"github.com/ashutoshpith/api"
 	"github.com/ashutoshpith/base"
+	"github.com/ashutoshpith/dictionary"
 	"github.com/ashutoshpith/download"
 	"github.com/ashutoshpith/xlsx"
 	"github.com/urfave/cli/v2"
@@ -60,7 +60,7 @@ func main() {
     commandCommand := base.Command(app.Flags)
 	xlsxCommand := xlsx.Xlsx(app.Flags)
 	urlDownloadCommand := download.Url(app.Flags)
-	dictCommand := api.Dict(app.Flags)
+	dictCommand := dictionary.Dict(app.Flags)
 
 	app.Commands = []*cli.Command {
 		testCommand,

@@ -1,4 +1,4 @@
-package api
+package dictionary
 
 type DictData struct{
 	Word string

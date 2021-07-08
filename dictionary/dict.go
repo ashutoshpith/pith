@@ -1,23 +1,29 @@
-package api
+package dictionary
 
 import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"time"
+
+	"github.com/ashutoshpith/api"
 
 	"github.com/Delta456/box-cli-maker/v2"
 )
 
-func (api *Api) DictSearch() (*[]DictData, error)  {
-	req := "https://api.dictionaryapi.dev/api/v2/entries/en_US/" 
-	api.url = req
+type Dictionary struct{
+	api api.Api
+}
+
+
+func (dict *Dictionary) DictSearch() (*[]DictData, error)  {
+	req := fmt.Sprintf("https://api.dictionaryapi.dev/api/v2/entries/%s/%s", dict.api.Lang, dict.api.Query) 
+
+	dict.api.Url = req
 	client := http.Client{
-		Timeout: 10 * time.Second,
+		Timeout: dict.api.Timeout,
 	}
-	res := api.url + api.Query
-	        url, _ := client.Get(res)
+	        url, _ := client.Get(dict.api.Url)
 			body, err := ioutil.ReadAll(url.Body)
 			if err != nil {
 				return nil, err
@@ -31,7 +37,7 @@ func (api *Api) DictSearch() (*[]DictData, error)  {
 			return &data, nil
 }
 
-func (api *Api) DictIterate(data []DictData) {
+func (dict *Dictionary) DictIterate(data []DictData) {
 	config := box.Config{Px: 12, Py: 2, Type: "", TitlePos: "Inside"}
     boxNew := box.Box{TopRight: "*", TopLeft: "*", BottomRight: "*", BottomLeft: "*", Horizontal: "-", Vertical: "|", Config: config}
 	for _, j := range data {

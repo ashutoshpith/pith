@@ -1,9 +1,11 @@
-package api
+package dictionary
 
 import (
+	"time"
+
+	"github.com/ashutoshpith/api"
 	"github.com/urfave/cli/v2"
 )
-
 
 func Dict(flags []cli.Flag) *cli.Command {
 
@@ -14,11 +16,16 @@ func Dict(flags []cli.Flag) *cli.Command {
 		Flags: flags,
 		Action: func(c *cli.Context) error {
 			value := c.String("text1")
-			api := Api{
-				Query: value,
+			dict := Dictionary{
+					api.Api{
+					 Query: value,
+					 Timeout: 10 * time.Second,
+					 Lang: "en_US",
+					},
 			}
-			data, _ := api.DictSearch()
-			api.DictIterate(*data)
+			
+			data, _ := dict.DictSearch()
+			dict.DictIterate(*data)
 	
 			return nil
 		},

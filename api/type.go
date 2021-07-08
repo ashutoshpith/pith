@@ -1,8 +1,11 @@
 package api
 
+import "time"
+
 type Api struct {
-	url string
+	Url string
 	Query string
-	// data Data
+	Timeout time.Duration
+	Lang string
 }
 
