@@ -17,7 +17,7 @@ type InfoType struct {
 func Info() *InfoType {
 	info := InfoType{
 		Name: "Pith",
-		Version: "1.0.2",
+		Version: "1.0.3",
 		Usage: "A Cli App",
 		Help: "Not Yet Needed",
 		Copyright: "(c) 2021 MIT",
