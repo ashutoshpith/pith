@@ -2,9 +2,9 @@ package download
 
 import (
 	"fmt"
-	"os"
 	"sync"
 
+	"github.com/ashutoshpith/box"
 	"github.com/urfave/cli/v2"
 )
 
@@ -23,32 +23,30 @@ func Url(flags []cli.Flag) *cli.Command {
 			return nil
 		},
 		Action: func (c *cli.Context) error  {
-		 fmt.Println("Url Downloader started")
 		 text1 := c.String("text1")
 		 text2 := c.String("text2")
 		 arg1 := c.String("arg1")
 		 arg2 := c.String("arg2")
-		 filepath, _ := os.Getwd()
-		 fmt.Println("cw ", filepath)
-		//  setPath := filepath + "/dir/" + "logo.svg"
-		//  fmt.Println("set ", setPath)
+		 
+		UrlDownloadFile(Payload{
+			filepath: arg1,
+			url: text1,
+		 })
+		 if text2 != "" {
 		 var wg sync.WaitGroup
 		 for i := 0; i < 2; i++ {
 			 wg.Add(1)
 		     go UrlDownloadFile(Payload{
-			   filepath: arg1,
-			   url: text1,
+			   filepath: arg2,
+			   url: text2,
 			   wg: &wg,
 			 })
 		 }
-		 UrlDownloadFile(Payload{
-			filepath: arg2,
-			url: text2,
-		 })
 		 wg.Wait()
-
-		 fmt.Println("Downloaded Url: ", text1)
-		 fmt.Println("Downloaded Url: ", text2)
+		}
+		box := box.Box()
+		fmt.Print("Downloaded Url: ")
+		box.Println(text1, text1)
 		 return nil
 		 },
 	}

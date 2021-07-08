@@ -7,8 +7,7 @@ import (
 	"net/http"
 
 	"github.com/ashutoshpith/api"
-
-	"github.com/Delta456/box-cli-maker/v2"
+	"github.com/ashutoshpith/box"
 )
 
 type Dictionary struct{
@@ -38,9 +37,8 @@ func (dict *Dictionary) DictSearch() (*[]DictData, error)  {
 }
 
 func (dict *Dictionary) DictIterate(data []DictData) {
-	config := box.Config{Px: 12, Py: 2, Type: "", TitlePos: "Inside"}
-    boxNew := box.Box{TopRight: "*", TopLeft: "*", BottomRight: "*", BottomLeft: "*", Horizontal: "-", Vertical: "|", Config: config}
-	for _, j := range data {
+	box := box.Box()
+		for _, j := range data {
 		fmt.Println("Search:", j.Word)
 		fmt.Println()
 		for _, md := range j.Meanings {
@@ -48,7 +46,7 @@ func (dict *Dictionary) DictIterate(data []DictData) {
 			for _, def := range md.Definitions {
 				defOut := "Definition: "+ def.Definition
 				examOut := "Example: " +def.Example
-			    boxNew.Println(defOut, examOut)
+			    box.Println(defOut, examOut)
 			}
 		}
 	}
