@@ -16,7 +16,8 @@ COMMANDS:<br>
 A, a        B<br>
 command, c<br>
 name        Name Printitng<br>
-url, u<br>
+dict, di    Search Any Word From Dictionary<br>
+url, u      Download File From Remote Host<br>
 xlsx, xl    Xlsx<br>
 help, h     Shows a list of commands or help for one command<br>
 <br>
