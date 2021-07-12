@@ -1,0 +1,5 @@
+package sysInfo
+
+func Load(){
+	
+}

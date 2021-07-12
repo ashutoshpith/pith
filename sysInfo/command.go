@@ -13,6 +13,7 @@ func Sys(flags []cli.Flag) *cli.Command {
 		Flags: flags,
 		Action: func (c *cli.Context) error  {
 		//  SysInfo()
+		Load()
 		 return nil
 		 },
 	}

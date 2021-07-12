@@ -7,5 +7,8 @@ type Api struct {
 	Query string
 	Timeout time.Duration
 	Lang string
+	Addr string
+	Password string
+	Db int
 }
 
