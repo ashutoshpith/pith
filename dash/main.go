@@ -1,27 +1,27 @@
-package main
+package dash
 
 import (
-	"fmt"
+	"log"
 
-	"github.com/ashutoshpith/api"
-	rediskv "github.com/ashutoshpith/redisKv"
+	ui "github.com/gizak/termui/v3"
+	"github.com/gizak/termui/v3/widgets"
 )
 
-
-
-func main(){
-	redisKp := rediskv.RedisDrive{
-		Api: api.Api{
-		  Addr: "localhost:6379",
-		  Password: "",
-		  Db: 0,
-		},
+func LoadUi() {
+	if err := ui.Init(); err != nil {
+		log.Fatalf("failed to initialize termui: %v", err)
 	}
-	p := redisKp.Ping()
-	fmt.Println(p)
-	redisKp.Set("kp", "oj")
-	k := redisKp.Get("kp")
-	fmt.Println(k)
-	
-	
+	defer ui.Close()
+
+	p := widgets.NewParagraph()
+	p.Text = "Hello World!"
+	p.SetRect(0, 0, 25, 5)
+
+	ui.Render(p)
+ 
+	for e := range ui.PollEvents() {
+		if e.Type == ui.KeyboardEvent {
+			break
+		}
+	}
 }

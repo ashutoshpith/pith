@@ -8,6 +8,7 @@ import (
 	"sort"
 
 	"github.com/ashutoshpith/base"
+	"github.com/ashutoshpith/dash"
 	"github.com/ashutoshpith/dictionary"
 	"github.com/ashutoshpith/download"
 	"github.com/ashutoshpith/sysInfo"
@@ -58,6 +59,7 @@ func main() {
 	dictCommand := dictionary.Dict(app.Flags)
 	authorCommand := base.AuthorInfo(app.Flags)
 	sysCommand := sysInfo.Sys(app.Flags)
+	dashCommand := dash.Dashboard(app.Flags)
 
 	app.Commands = []*cli.Command {
 		nameCommand,
@@ -67,6 +69,7 @@ func main() {
 		dictCommand,
 		authorCommand,
 		sysCommand,
+		dashCommand,
 
 	}
 	sort.Sort(cli.FlagsByName(app.Flags))
